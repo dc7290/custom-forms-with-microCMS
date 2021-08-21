@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.js-focus-visible :focus:not(.focus-visible) {
+  outline: 0;
+}
