@@ -1,6 +1,6 @@
 {
-  "name": "nextjs-starter",
-  "license": "UNLICENSED",
+  "name": "custom-forms-with-microcms",
+  "license": "MIT",
   "scripts": {
     "analyze": "ANALYZE=true yarn build",
     "create:fc": "hygen new fc",
