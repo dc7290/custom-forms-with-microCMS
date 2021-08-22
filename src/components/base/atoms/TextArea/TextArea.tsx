@@ -1,7 +1,8 @@
 import { ErrorMessage } from '@hookform/error-message'
 import { AriaTextFieldProps } from '@react-types/textfield'
 import clsx from 'clsx'
-import { ForwardedRef, forwardRef, InputHTMLAttributes, LabelHTMLAttributes, useRef } from 'react'
+import { TextareaHTMLAttributes } from 'react'
+import { ForwardedRef, forwardRef, LabelHTMLAttributes, useRef } from 'react'
 import { useTextField } from 'react-aria'
 import { DeepMap, FieldError, UseFormRegisterReturn } from 'react-hook-form'
 
@@ -14,12 +15,12 @@ type Props = {
 } & UseFormRegisterReturn &
   Omit<AriaTextFieldProps, 'onChange'>
 
-const TextField = (
+const TextArea = (
   { label, errors, className, onChange, ...props }: Props,
-  forwardedRef: ForwardedRef<HTMLInputElement>
+  forwardedRef: ForwardedRef<HTMLTextAreaElement>
 ) => {
-  const internalRef = useRef<HTMLInputElement | null>(null)
-  const ref = mergedRef<HTMLInputElement>(forwardedRef, internalRef)
+  const internalRef = useRef<HTMLTextAreaElement | null>(null)
+  const ref = mergedRef<HTMLTextAreaElement>(forwardedRef, internalRef)
   const { inputProps, labelProps } = useTextField(
     {
       label,
@@ -28,7 +29,7 @@ const TextField = (
     },
     internalRef
   ) as {
-    inputProps: InputHTMLAttributes<HTMLInputElement>
+    inputProps: TextareaHTMLAttributes<HTMLTextAreaElement>
     labelProps: LabelHTMLAttributes<HTMLLabelElement>
   }
 
@@ -41,11 +42,11 @@ const TextField = (
             <div className="absolute -top-1 -right-1 text-[10px] text-red-400 translate-x-full">※</div>
           )}
         </label>
-        <input
+        <textarea
           {...inputProps}
           ref={ref}
           onChange={onChange}
-          className={clsx(className, 'flex-none w-3/4 ml-5 border border-gray-400')}
+          className={clsx(className, 'flex-none w-3/4 min-h-[200px] ml-5 border border-gray-400')}
         />
       </div>
       <ErrorMessage
@@ -61,6 +62,6 @@ const TextField = (
   )
 }
 
-const _TextField = forwardRef(TextField)
+const _TextArea = forwardRef(TextArea)
 
-export default _TextField
+export default _TextArea
