@@ -16,7 +16,11 @@ module.exports = {
       serif: ['serif'],
       english: ['sans-serif'],
     },
-    extend: {},
+    extend: {
+      colors: {
+        black: '#333',
+      },
+    },
   },
   variants: {},
   plugins: [],

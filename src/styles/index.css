@@ -5,3 +5,7 @@
 .js-focus-visible :focus:not(.focus-visible) {
   outline: 0;
 }
+
+.js-focus-visible .focus-visible {
+  @apply outline-black;
+}

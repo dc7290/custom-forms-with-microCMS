@@ -47,13 +47,6 @@ module.exports = {
         printWidth: 120,
       },
     ],
-    // React Hooks のための設定
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
-    // prop types を使っていないので off
-    'react/prop-types': 'off',
-    // Next.js では React を import しなくてもよいので off にする
-    'react/react-in-jsx-scope': 'off',
     // 関数の引数や返り値に必ず型をつけるルールを off にする
     // アプリケーションをより堅牢にしたい場合は、このルールを on にしてください
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -63,8 +56,6 @@ module.exports = {
     'import/prefer-default-export': 'off',
     // 絶対パスでのモジュールの読み込みをokにする
     'import/no-unresolved': 'off',
-    // 「import Link from 'next/link'」で引っかかるため無効化
-    'no-submodule-imports': 'off',
     // importの順番を整理する
     'import/order': [
       'error',
@@ -89,8 +80,6 @@ module.exports = {
     'no-restricted-syntax': 'off',
     // onClick={e => handleClick(e)} で引っかかるため無効化
     'jsx-no-lambda': 'off',
-    // <Component {...props}>を許可する
-    'react/jsx-props-no-spreading': 'off',
     // 順序の入れ替えがない場合はok
     'react/no-array-index-key': 'off',
     // component の props の destructuring を非必須にする
