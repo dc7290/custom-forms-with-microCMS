@@ -1,4 +1,3 @@
-import { ErrorMessage } from '@hookform/error-message'
 import { AriaTextFieldProps } from '@react-types/textfield'
 import clsx from 'clsx'
 import { TextareaHTMLAttributes } from 'react'
@@ -6,6 +5,7 @@ import { ForwardedRef, forwardRef, LabelHTMLAttributes, useRef } from 'react'
 import { useTextField } from 'react-aria'
 import { DeepMap, FieldError, UseFormRegisterReturn } from 'react-hook-form'
 
+import { ErrorMessage } from '~/src/components/case/error/ErrorMessage'
 import mergedRef from '~/src/utils/mergedRef'
 
 type Props = {
@@ -49,15 +49,7 @@ const TextArea = (
           className={clsx(className, 'flex-none w-3/4 min-h-[200px] ml-5 border border-gray-400')}
         />
       </div>
-      <ErrorMessage
-        name={props.name}
-        errors={errors}
-        render={({ message }) => (
-          <p role="alert" className="mt-2 text-xs text-red-400">
-            {message}
-          </p>
-        )}
-      />
+      <ErrorMessage name={props.name} errors={errors} />
     </div>
   )
 }
