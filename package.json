@@ -41,7 +41,7 @@
     "react-hook-form": "7.12.2",
     "react-spinners": "0.11.0",
     "react-use": "17.2.4",
-    "tailwindcss": "2.2.7"
+    "tailwindcss": "2.2.16"
   },
   "devDependencies": {
     "@babel/core": "7.15.0",
