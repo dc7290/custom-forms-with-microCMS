@@ -59,7 +59,7 @@ const Checkbox = (
           {isChecked && <img src={arrowSrc} width={11} height={8} alt="チェック" />}
         </div>
         {children}
-        {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-400">必須</div>}
+        {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}
       </label>
       {description && (
         <p id={descriptionId} className="mt-1 text-sm" dangerouslySetInnerHTML={{ __html: newLine(description) }} />

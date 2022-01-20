@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useReducer } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { DotLoader } from 'react-spinners'
+import DotLoader from 'react-spinners/DotLoader'
 
 import useWarningOnExit from '~/src/hooks/warn/useWarningOnExit'
 import { Form } from '~/src/types/form'
@@ -152,7 +152,7 @@ const ContactForm = ({ list, className }: Props) => {
     //     dispatch({ type: 'ADD_ERROR' })
     //   })
     setTimeout(() => {
-      window.confirm(`以下のデータで送信される想定です。
+      window.alert(`以下のデータで送信される想定です。
 ${JSON.stringify({ data: state.data })}`)
       dispatch({ type: 'COMPLETE' })
     }, 1000)
@@ -177,7 +177,6 @@ ${JSON.stringify({ data: state.data })}`)
                   exit={{ opacity: 0 }}
                 >
                   <FormList list={formList} {...{ register, errors, watch }} />
-                  <input tabIndex={-1} type="submit" className="sr-only" />
                 </motion.form>
               ) : state.progress === 'confirm' ? (
                 <motion.div key="confirm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

@@ -12,7 +12,7 @@ const ErrorMessage = ({ name, errors }: Props) => {
       name={name}
       errors={errors}
       render={({ message }) => (
-        <p role="alert" className="mt-2 text-xs text-red-400 leading-tight">
+        <p role="alert" className="mt-2 text-xs text-red-700 leading-tight">
           {message}
         </p>
       )}

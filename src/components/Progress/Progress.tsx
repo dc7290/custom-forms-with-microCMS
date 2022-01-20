@@ -16,7 +16,7 @@ const Progress = ({ progress, isSending, isError, className }: Props) => {
             className={clsx(
               progress !== 'input' && !isError && 'border-2 border-red-500',
               progress === 'input' && !isError && 'border-2 border-gray-200',
-              'flex justify-center items-center w-8 h-8  rounded-full'
+              'flex justify-center items-center w-8 h-8 rounded-full'
             )}
           >
             {progress === 'input' && !isError && (

@@ -6,10 +6,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({ enabled: process.e
 const config = {
   // React Aria のバグを回避するためにオフにする
   // reactStrictMode: true,
-  images: {
-    formats: ['image/avif', 'image/webp'],
-    deviceSizes: [320, 480, 640, 750, 828, 1080, 1200, 1920, 2048],
-  },
   trailingSlash: true,
   eslint: {
     dirs: ['pages', 'src'],

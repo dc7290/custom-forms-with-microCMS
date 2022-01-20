@@ -14,7 +14,7 @@ const ConfirmList = ({ list, className }: Props) => {
         <li key={key}>
           <div className="flex items-center">
             <div className="font-bold text-lg">{key}</div>
-            {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-400">必須</div>}
+            {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}
           </div>
           {value.includes('\n') ? (
             <div className="min-h-[160px] mt-2 p-2 rounded border border-black">

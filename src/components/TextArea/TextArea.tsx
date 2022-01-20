@@ -36,7 +36,7 @@ const TextArea = (
     <div className={clsx(className)}>
       <label {...labelProps} className="flex items-center cursor-pointer">
         <div className="font-bold text-lg">{label}</div>
-        {props.isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-400">必須</div>}
+        {props.isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}
       </label>
       {props.description && (
         <p

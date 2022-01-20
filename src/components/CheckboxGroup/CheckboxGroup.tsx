@@ -26,7 +26,7 @@ const CheckboxGroup = ({ label, isRequired, description, className, name, errors
     >
       <div id={labelId} className="flex items-center">
         <div className="font-bold text-lg">{label}</div>
-        {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-400">必須</div>}
+        {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}
       </div>
       {description && (
         <p id={descriptionId} className="mt-1 text-sm">
