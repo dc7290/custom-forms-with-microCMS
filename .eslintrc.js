@@ -1,16 +1,5 @@
 module.exports = {
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-  },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'next',
-    'next/core-web-vitals',
-    'plugin:prettier/recommended',
-  ],
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'next/core-web-vitals', 'prettier'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -24,29 +13,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json',
   },
-  settings: {
-    react: {
-      version: 'detect',
-    },
-    'import/resolver': {
-      node: {
-        extensions: ['.js', '.ts', '.tsx'],
-      },
-    },
-  },
-  plugins: [],
   rules: {
-    // prettier の設定
-    'prettier/prettier': [
-      'error',
-      {
-        trailingComma: 'es5',
-        tabWidth: 2,
-        semi: false,
-        singleQuote: true,
-        printWidth: 120,
-      },
-    ],
     // 関数の引数や返り値に必ず型をつけるルールを off にする
     // アプリケーションをより堅牢にしたい場合は、このルールを on にしてください
     '@typescript-eslint/explicit-module-boundary-types': 'off',
@@ -80,10 +47,8 @@ module.exports = {
     'no-restricted-syntax': 'off',
     // onClick={e => handleClick(e)} で引っかかるため無効化
     'jsx-no-lambda': 'off',
-    // 順序の入れ替えがない場合はok
-    'react/no-array-index-key': 'off',
-    // component の props の destructuring を非必須にする
-    'react/destructuring-assignment': 'off',
+    // <Component {...props}>を許可する
+    'react/jsx-props-no-spreading': 'off',
     // console.errorを許容する
     'no-console': ['error', { allow: ['warn', 'error'] }],
     // next/imageを使わないことを許容する

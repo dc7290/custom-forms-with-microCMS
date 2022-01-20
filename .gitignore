@@ -15,10 +15,6 @@
 # production
 /build
 
-# env
-# こちらのコメントを外してご使用ください
-# .env*
-
 # misc
 .DS_Store
 
@@ -33,3 +29,4 @@ yarn-error.log*
 .eslintcache
 src/api/$api.ts
 storybook-static/
+tsconfig.tsbuildinfo

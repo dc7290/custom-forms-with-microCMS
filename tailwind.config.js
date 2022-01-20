@@ -1,6 +1,5 @@
 module.exports = {
-  mode: 'jit',
-  purge: ['./src/components/**/*.{js,ts,tsx}', './pages/**/*.{js,ts,tsx}'],
+  content: ['./src/components/**/*.{js,ts,tsx}', './pages/**/*.{js,ts,tsx}'],
   theme: {
     container: {
       center: true,
@@ -11,18 +10,8 @@ module.exports = {
         xl: '3rem',
       },
     },
-    fontFamily: {
-      sans: ['sans-serif'],
-      serif: ['serif'],
-      english: ['sans-serif'],
-    },
-    extend: {
-      colors: {
-        black: '#333',
-      },
-    },
+    extend: {},
   },
-  variants: {},
   plugins: [],
   corePlugins: {},
 }

@@ -1,11 +1,10 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import './tailwind.css';
 
-.js-focus-visible :focus:not(.focus-visible) {
-  outline: 0;
-}
-
-.js-focus-visible .focus-visible {
-  @apply outline-black;
+.js-focus-visible {
+  :focus:not(.focus-visible) {
+    outline: 0;
+  }
+  .focus-visible {
+    @apply outline outline-offset-2 outline-2 outline-black;
+  }
 }

@@ -1,20 +1,19 @@
 import '~/src/styles/index.css'
+import 'scroll-behavior-polyfill'
 import 'focus-visible'
 
-import { AppProps } from 'next/app'
-import { SSRProvider } from 'react-aria'
+import { SSRProvider } from '@react-aria/ssr'
+import { AppLayoutProps } from 'next/app'
 
-import { Layout } from '~/src/components/layout/Layout'
-import usePageBetweenFocus from '~/src/hooks/usePageBetweenFocus'
-import useWindowNarrow from '~/src/hooks/useWindowNarrow'
+import { Layout } from '~/src/components/Layout'
 
-function MyApp({ Component, pageProps }: AppProps) {
-  useWindowNarrow()
-  usePageBetweenFocus()
+function MyApp({ Component, pageProps }: AppLayoutProps) {
+  const layoutProps =
+    typeof Component.layoutProps === 'function' ? Component.layoutProps(pageProps) : Component.layoutProps
 
   return (
     <SSRProvider>
-      <Layout>
+      <Layout {...layoutProps}>
         <Component {...pageProps} />
       </Layout>
     </SSRProvider>

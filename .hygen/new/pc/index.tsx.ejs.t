@@ -1,7 +1,7 @@
 ---
 to: "<%= is_dynamic_route ? `pages/${path}/[${route_name}].tsx` : `pages/${path}/index.tsx` %>"
 ---
-import type { <% if (is_dynamic_route) { %>GetStaticPaths, <% } %><% if (is_get_static_props) { %>GetStaticProps, <% } %>NextPage } from 'next'
+import type { <% if (is_dynamic_route) { %>GetStaticPaths, <% } %><% if (is_get_static_props) { %>GetStaticProps, <% } %>NextLayoutPage } from 'next'
 <% if (is_dynamic_route) { %>
 export const getStaticPaths: GetStaticPaths = async () => {
 
@@ -27,7 +27,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   }
 }
 <% } %>
-const Page: NextPage<% if (is_get_static_props) { %><Props><% } %> = () => {
+const Page: NextLayoutPage<% if (is_get_static_props) { %><Props><% } %> = () => {
   return (
     <>
       <div></div>
