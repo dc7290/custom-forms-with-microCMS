@@ -38,7 +38,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 description={item.description}
                 autoComplete="name"
                 {...register('name', {
-                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  required: item.isRequired ? `「${item.title}」は必ず入力してください。` : false,
                 })}
               />
             )
@@ -56,7 +56,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 description={item.description}
                 autoComplete="email"
                 {...register('email', {
-                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  required: item.isRequired ? `「${item.title}」は必ず入力してください。` : false,
                   pattern: {
                     value:
                       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
@@ -79,7 +79,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 description={item.description}
                 autoComplete="tel"
                 {...register('tel', {
-                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  required: item.isRequired ? `「${item.title}」は必ず入力してください。` : false,
                   pattern: {
                     value: /^[０-９0-9\-ー]+$/,
                     message: '数字と「-」で入力してください。',
@@ -104,7 +104,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 description={item.description}
                 autoComplete="organization"
                 {...register('organization', {
-                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  required: item.isRequired ? `「${item.title}」は必ず入力してください。` : false,
                 })}
               />
             )
@@ -137,7 +137,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 description={item.description}
                 autoComplete="address-line1"
                 {...register('address', {
-                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  required: item.isRequired ? `「${item.title}」は必ず入力してください。` : false,
                   setValueAs: (v) =>
                     v
                       .replace(/ー/g, '-')
@@ -157,7 +157,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 placeholder={item.placeholder}
                 description={item.description}
                 {...register(item.id, {
-                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  required: item.isRequired ? `「${item.title}」は必ず入力してください。` : false,
                 })}
               />
             )
@@ -173,7 +173,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 placeholder={item.placeholder}
                 description={item.description}
                 {...register(item.id, {
-                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  required: item.isRequired ? `「${item.title}」は必ず入力してください。` : false,
                 })}
               />
             )
@@ -187,7 +187,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 isRequired={item.isRequired}
                 description={item.description}
                 {...register(item.id, {
-                  required: item.isRequired ? `[${item.title}]をチェックしてください。` : false,
+                  required: item.isRequired ? `「${item.title}]をチェックしてください。` : false,
                 })}
               >
                 {item.title}
@@ -211,7 +211,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                       id={id}
                       value={id}
                       {...register(item.id, {
-                        required: item.isRequired ? `[${item.title}]の項目を最低1つチェックしてください。` : false,
+                        required: item.isRequired ? `「${item.title}]の項目を最低1つチェックしてください。` : false,
                       })}
                     >
                       {text}
