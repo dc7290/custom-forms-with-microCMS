@@ -1,9 +1,10 @@
 import clsx from 'clsx'
-import { UseFormRegister, UseFormWatch } from 'react-hook-form'
+import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
 import { Checkbox } from '~/src/components/Checkbox'
 import { CheckboxGroup } from '~/src/components/CheckboxGroup'
 import { ErrorMessageProps } from '~/src/components/ErrorMessage'
+import { PostalCodeAddressField } from '~/src/components/PostalCodeAddressField'
 import { RadioGroup } from '~/src/components/RadioGroup'
 import { TextArea } from '~/src/components/TextArea'
 import { TextField } from '~/src/components/TextField'
@@ -15,11 +16,12 @@ type Props = {
   list: FormList
   register: UseFormRegister<FormValues>
   errors: ErrorMessageProps['errors']
+  setValue: UseFormSetValue<FormValues>
   watch: UseFormWatch<FormValues>
   className?: string
 }
 
-const FormList = ({ list, register, errors, watch, className }: Props) => {
+const FormList = ({ list, register, errors, setValue, watch, className }: Props) => {
   return (
     <div className={clsx(className, 'space-y-6')}>
       {list.map((item) => {
@@ -103,6 +105,43 @@ const FormList = ({ list, register, errors, watch, className }: Props) => {
                 autoComplete="organization"
                 {...register('organization', {
                   required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                })}
+              />
+            )
+          }
+          case 'postalCodeAndAddress': {
+            return (
+              <PostalCodeAddressField
+                key="postalCodeAndAddress"
+                postalCode={{ ...item }}
+                isRequired={item.isRequired}
+                isAutoFill={item.isAutoFill}
+                address={{
+                  title: item.addressTitle,
+                  placeholder: item.addressPlaceholder,
+                  description: item.addressDescription,
+                }}
+                {...{ register, setValue, errors }}
+              />
+            )
+          }
+          case 'address': {
+            return (
+              <TextField
+                key="address"
+                label={item.title}
+                errors={errors}
+                id="address"
+                isRequired={item.isRequired}
+                placeholder={item.placeholder}
+                description={item.description}
+                autoComplete="address-line1"
+                {...register('address', {
+                  required: item.isRequired ? `[${item.title}」は必ず入力してください。` : false,
+                  setValueAs: (v) =>
+                    v
+                      .replace(/ー/g, '-')
+                      .replace(/[０-９]/g, (v: string) => String.fromCharCode(v.charCodeAt(0) - 0xfee0)),
                 })}
               />
             )

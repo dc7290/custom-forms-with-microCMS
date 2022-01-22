@@ -2,11 +2,11 @@ import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useReducer } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import DotLoader from 'react-spinners/DotLoader'
 
 import useWarningOnExit from '~/src/hooks/warn/useWarningOnExit'
 import { Form } from '~/src/types/form'
 
+import { LoadingSpinner } from '../LoadingSpinner'
 import { Progress } from '../Progress'
 
 import { ConfirmList } from './ConfirmList'
@@ -18,7 +18,7 @@ type Props = {
   className?: string
 }
 
-export type FormValues = Record<string, string | boolean | string[]> & { hasConsented: boolean }
+export type FormValues = Record<string, string | boolean | string[]>
 
 type State = {
   progress: 'input' | 'confirm' | 'complete'
@@ -89,6 +89,7 @@ const ContactForm = ({ list, className }: Props) => {
     register,
     handleSubmit,
     formState: { errors, isDirty },
+    setValue,
     watch,
   } = useForm<FormValues>({
     delayError: 500,
@@ -105,26 +106,40 @@ const ContactForm = ({ list, className }: Props) => {
     })
   }
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    const confirmData: State['data'] = formList.map(({ id, fieldId, isRequired, title }) => {
-      let value = ''
+    const confirmData: State['data'] = []
 
-      if (fieldId === 'checkbox') {
-        value = data[id] ? 'チェック' : ''
-      } else if (fieldId === 'checkboxGroup') {
-        value =
-          data[id] === false
-            ? ''
-            : (data[id] as string[]).map((value) => formListItemTitleMap.get(value) ?? '').join(', ')
-      } else if (fieldId === 'radioGroup') {
-        value = formListItemTitleMap.get(data[id] as string) ?? ''
-      } else if (fieldId === 'textField' || fieldId === 'textArea') {
-        value = data[id] as string
-      } else {
-        value = data[fieldId] as string
+    for (let i = 0; i < formList.length; i++) {
+      const item = formList[i]
+
+      if (item === undefined) throw Error('ConfirmDataの作成中にエラーが起きました。')
+
+      if (item.fieldId === 'postalCodeAndAddress') {
+        confirmData.push(
+          [item.title, data['postalCode'] as string, item.isRequired ?? false],
+          [item.addressTitle, data['address'] as string, item.isRequired ?? false]
+        )
+        continue
       }
 
-      return [title, value, isRequired ?? false]
-    })
+      let value = ''
+
+      if (item.fieldId === 'checkbox') {
+        value = data[item.id] ? 'チェック' : ''
+      } else if (item.fieldId === 'checkboxGroup') {
+        value =
+          data[item.id] === false
+            ? ''
+            : (data[item.id] as string[]).map((value) => formListItemTitleMap.get(value) ?? '').join(', ')
+      } else if (item.fieldId === 'radioGroup') {
+        value = formListItemTitleMap.get(data[item.id] as string) ?? ''
+      } else if (item.fieldId === 'textField' || item.fieldId === 'textArea') {
+        value = data[item.id] as string
+      } else {
+        value = data[item.fieldId] as string
+      }
+
+      confirmData.push([item.title, value, item.isRequired ?? false])
+    }
 
     handleFormScroll()
     dispatch({ type: 'CONFIRM', payload: confirmData })
@@ -155,7 +170,7 @@ const ContactForm = ({ list, className }: Props) => {
       window.alert(`以下のデータで送信される想定です。
 ${JSON.stringify({ data: state.data })}`)
       dispatch({ type: 'COMPLETE' })
-    }, 1000)
+    }, 2000)
   }
 
   const shouldWarn = isDirty && state.progress !== 'complete'
@@ -166,7 +181,7 @@ ${JSON.stringify({ data: state.data })}`)
       <Progress {...state} />
       {!state.isError ? (
         <>
-          <div className="mt-10 p-8 bg-gray-100 rounded">
+          <div className="mt-10 p-6 bg-gray-100 rounded md:p-8">
             <AnimatePresence exitBeforeEnter>
               {state.progress === 'input' ? (
                 <motion.form
@@ -176,7 +191,8 @@ ${JSON.stringify({ data: state.data })}`)
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <FormList list={formList} {...{ register, errors, watch }} />
+                  <FormList list={formList} {...{ register, errors, setValue, watch }} />
+                  <button type="submit" className="hidden" aria-hidden="true" />
                 </motion.form>
               ) : state.progress === 'confirm' ? (
                 <motion.div key="confirm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
@@ -190,7 +206,7 @@ ${JSON.stringify({ data: state.data })}`)
               )}
               {state.isSending && (
                 <motion.div key="loading" className="fixed inset-0 flex justify-center items-center bg-white/80">
-                  <DotLoader color="#000" />
+                  <LoadingSpinner className="w-8 h-8 text-gray-900" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -204,22 +220,28 @@ ${JSON.stringify({ data: state.data })}`)
               className="flex justify-center items-center space-x-8 mt-10"
             >
               {state.progress === 'input' && (
-                <button onClick={handleSubmit(onSubmit)} className="w-56 h-14 font-bold text-white rounded-lg bg-black">
+                <button
+                  onClick={handleSubmit(onSubmit)}
+                  className="w-56 h-14 font-bold text-white rounded-lg bg-black shadow"
+                >
                   入力内容を確認する
                 </button>
               )}
               {state.progress === 'confirm' && (
                 <>
-                  <button onClick={handleBack} className="w-56 h-14 font-bold rounded-lg bg-gray-300">
+                  <button onClick={handleBack} className="w-56 h-14 font-bold rounded-lg bg-gray-300 shadow">
                     戻る
                   </button>
-                  <button onClick={handleSend} className="w-56 h-14 font-bold text-white rounded-lg bg-black">
+                  <button onClick={handleSend} className="w-56 h-14 font-bold text-white rounded-lg bg-black shadow">
                     送信する
                   </button>
                 </>
               )}
               {state.progress === 'complete' && (
-                <a href="" className="flex justify-center items-center w-56 h-14 font-bold rounded-lg bg-gray-300">
+                <a
+                  href=""
+                  className="flex justify-center items-center w-56 h-14 font-bold rounded-lg bg-gray-300 shadow"
+                >
                   TOPへ戻る
                 </a>
               )}

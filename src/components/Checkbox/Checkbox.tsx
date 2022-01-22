@@ -15,7 +15,7 @@ type Props = {
   UseFormRegisterReturn &
   Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'>
 
-const arrowSrc =
+const checkIconSrc =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMC44MjgiIGhlaWdodD0iNy45MTQiIHZpZXdCb3g9IjAgMCAxMC44MjggNy45MTQiPjxwYXRoIGQ9Ik0xNCw5LDguNSwxNC41LDYsMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00LjU4NiAtNy41ODYpIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+'
 
 const Checkbox = (
@@ -56,7 +56,7 @@ const Checkbox = (
         )}
       >
         <div aria-hidden="false" className="flex justify-center items-center w-4 h-4 mr-2 border border-black">
-          {isChecked && <img src={arrowSrc} width={11} height={8} alt="チェック" />}
+          {isChecked && <img src={checkIconSrc} width={11} height={8} alt="チェック" />}
         </div>
         {children}
         {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}

@@ -19,6 +19,10 @@ type Email = CommonField & {
   isConfirm: boolean
 }
 
+type Tel = CommonField & {
+  fieldId: 'tel'
+}
+
 type Organization = CommonField & {
   fieldId: 'organization'
 }
@@ -33,10 +37,6 @@ type PostalCodeAndAddress = CommonField & {
   addressPlaceholder?: string
   addressDescription?: string
   isAutoFill: boolean
-}
-
-type Tel = CommonField & {
-  fieldId: 'tel'
 }
 
 type TextField = CommonField & {

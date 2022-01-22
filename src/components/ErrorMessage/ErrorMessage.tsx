@@ -12,9 +12,16 @@ const ErrorMessage = ({ name, errors }: Props) => {
       name={name}
       errors={errors}
       render={({ message }) => (
-        <p role="alert" className="mt-2 text-xs text-red-700 leading-tight">
+        <div
+          className="relative z-10 inline-block min-w-[200px] mt-3 p-2 text-xs text-red-700 bg-white rounded-md shadow-[0_0_8px_rgba(0,0,0,0.16)]"
+          role="alert"
+        >
           {message}
-        </p>
+          <div
+            className="absolute -top-6 left-3 w-4 h-7 bg-white [clip-path:polygon(0_50%,0_100%,100%_100%)]"
+            aria-hidden="true"
+          />
+        </div>
       )}
     />
   )
