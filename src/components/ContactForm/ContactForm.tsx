@@ -182,7 +182,7 @@ ${JSON.stringify({ data: state.data })}`)
       {!state.isError ? (
         <>
           <div className="mt-10 p-6 bg-gray-100 rounded md:p-8">
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence>
               {state.progress === 'input' ? (
                 <motion.form
                   key="input"
@@ -192,6 +192,7 @@ ${JSON.stringify({ data: state.data })}`)
                   exit={{ opacity: 0 }}
                 >
                   <FormList list={formList} {...{ register, errors, setValue, watch }} />
+                  {/* formの中にsubmitではないボタンがあるため、不可視のsubmit buttonを置くことでエンターキーで送信できるようにする */}
                   <button type="submit" className="hidden" aria-hidden="true" />
                 </motion.form>
               ) : state.progress === 'confirm' ? (
@@ -211,7 +212,7 @@ ${JSON.stringify({ data: state.data })}`)
               )}
             </AnimatePresence>
           </div>
-          <AnimatePresence exitBeforeEnter>
+          <AnimatePresence>
             <motion.div
               key={state.progress}
               initial={{ opacity: 0 }}
