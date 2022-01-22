@@ -72,10 +72,7 @@ const IndexPage: NextLayoutPage<Props> = ({ form, error }) => {
     <>
       <Head>
         <title>カスタムフォーム</title>
-        <meta
-          name="description"
-          content="Zennの記事「microCMSを使ってフォーム作成アプリケーションを作る」のデモサイトです。"
-        />
+        <meta name="description" content="Zennの記事「microCMSを使ってフォーム作成アプリを作る」のデモサイトです。" />
       </Head>
       <div className="py-10">
         <h1 className="font-bold text-3xl text-center">カスタムフォーム</h1>
