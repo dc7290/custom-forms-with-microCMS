@@ -78,6 +78,11 @@ const PostalCodeAddressField = ({
   const search = async () => {
     const zipcode = internalPostalCodeRef.current?.value
     if (zipcode !== undefined) {
+      if (zipcode === '') {
+        dispatch({ type: 'COMPLETE', payload: '検索するためには郵便番号を入力してください。' })
+        return
+      }
+
       dispatch({ type: 'SEARCH' })
       const address = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zipcode}`).then((res) =>
         res.json()
@@ -125,9 +130,9 @@ const PostalCodeAddressField = ({
 
   return (
     <div className={clsx(className, 'space-y-6')}>
-      <div className="flex items-start">
+      <div className="md:flex md:items-start md:space-x-10">
         <TextField
-          className="w-1/3 min-w-[120px] mr-4 md:mr-10"
+          className="w-40 md:w-1/3"
           label={postalCode.title}
           errors={errors}
           id="postalCode"
@@ -140,7 +145,7 @@ const PostalCodeAddressField = ({
           onChange={isAutoFill ? handlePostalCodeChange : postalCodeFieldProps.onChange}
         />
         {isAutoFill && (
-          <div className="relative max-w-[200px] h-10 flex-1 mt-9">
+          <div className="relative max-w-[200px] h-10 mt-4 md:flex-1 md:mt-9">
             <button
               type="button"
               disabled={state.isLoading}
