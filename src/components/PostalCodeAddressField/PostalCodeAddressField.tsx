@@ -118,8 +118,7 @@ const PostalCodeAddressField = ({
     postalCodeFieldProps.onChange(e)
 
     const { value } = e.target
-    const isIncludes = /[-ー]/.test(value)
-    if ((isIncludes && value.length === 8) || (!isIncludes && value.length === 7)) {
+    if (/^[0-9０-９]{3}[-ー]?[0-9０-９]{4}$/.test(value)) {
       if (!state.isLoading) search()
     }
   }
