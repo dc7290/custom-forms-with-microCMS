@@ -3,6 +3,8 @@ import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes, React
 import { useFocusRing, useId } from 'react-aria'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
+import { newLine } from '~/src/utils/cms/textProcessing'
+
 import { ErrorMessage, ErrorMessageProps } from '../ErrorMessage'
 
 type Props = {
@@ -27,9 +29,7 @@ const RadioGroup = ({ label, description, className, name, errors, children }: P
         {label}
       </div>
       {description && (
-        <p id={descriptionId} className="mt-1 text-sm">
-          {description}
-        </p>
+        <p id={descriptionId} className="mt-1 text-sm" dangerouslySetInnerHTML={{ __html: newLine(description) }} />
       )}
       <div className={clsx({ 'ring-1 ring-red-400': errors?.[name] !== undefined }, 'mt-2')}>{children}</div>
       <ErrorMessage name={name} errors={errors} />
