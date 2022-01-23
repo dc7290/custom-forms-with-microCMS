@@ -75,20 +75,20 @@ const IndexPage: NextLayoutPage<Props> = ({ form, error }) => {
         <meta name="description" content="Zennの記事「microCMSを使ってフォーム作成アプリを作る」のデモサイトです。" />
       </Head>
       <div className="py-10">
-        <h1 className="font-bold text-3xl text-center">カスタムフォーム</h1>
+        <h1 className="text-3xl font-bold text-center">カスタムフォーム</h1>
         <p className="mt-8 text-center">※スタイルは仮です。自由にカスタマイズできます。</p>
         {error === null ? (
-          <ContactForm list={form} className="container sm:max-w-2xl mt-16 mx-auto" />
+          <ContactForm list={form} className="container mx-auto mt-16 sm:max-w-2xl" />
         ) : (
-          <div className="fixed z-50 inset-0">
+          <div className="fixed inset-0 z-50">
             <div className="absolute inset-0 bg-white/80" />
-            <div className="absolute inset-x-0 top-52 m-auto w-4/5 max-w-lg p-10 bg-white shadow-[0_0_16px_rgba(0,0,0,0.16)]">
+            <div className="absolute inset-x-0 top-52 p-10 m-auto w-4/5 max-w-lg bg-white shadow-[0_0_16px_rgba(0,0,0,0.16)]">
               フォーム生成中にエラーが発生しました。
               <br />
               以下のエラー内容を参考に、管理画面で修正をお願いします。
               <br />
               その後、もういちど画面プレビューをお試しください。
-              <ul className="mt-10 text-red-600 list-disc">
+              <ul className="mt-10 list-disc text-red-600">
                 {error.map((message) => (
                   <li key={message}>
                     <p role="alert">{message}</p>

@@ -27,8 +27,8 @@ const CheckboxGroup = ({ label, isRequired, description, className, name, errors
       className={clsx(className, '')}
     >
       <div id={labelId} className="flex items-center">
-        <div className="font-bold text-lg">{label}</div>
-        {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}
+        <div className="text-lg font-bold">{label}</div>
+        {isRequired && <div className="py-0.5 px-2 ml-3 text-white bg-red-600">必須</div>}
       </div>
       {description && (
         <p id={descriptionId} className="mt-1 text-sm" dangerouslySetInnerHTML={{ __html: newLine(description) }} />
@@ -77,11 +77,11 @@ const CheckboxGroupChild = (
         id={labelId}
         htmlFor={props.id}
         className={clsx(
-          { 'outline outline-offset-2 outline-2 outline-black': isFocused },
+          { 'outline-2 outline-black outline outline-offset-2': isFocused },
           'flex items-center cursor-pointer'
         )}
       >
-        <div aria-hidden="false" className="flex justify-center items-center w-4 h-4 mr-2 border border-black">
+        <div aria-hidden="false" className="flex justify-center items-center mr-2 w-4 h-4 border border-black">
           {isChecked && <img src={arrowSrc} width={11} height={8} alt="チェック" />}
         </div>
         {children}

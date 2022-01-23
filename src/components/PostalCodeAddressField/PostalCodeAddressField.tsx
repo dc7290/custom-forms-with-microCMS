@@ -144,7 +144,7 @@ const PostalCodeAddressField = ({
           onChange={isAutoFill ? handlePostalCodeChange : postalCodeFieldProps.onChange}
         />
         {isAutoFill && (
-          <div className="relative max-w-[200px] h-10 mt-4 md:flex-1 md:mt-9">
+          <div className="relative mt-4 max-w-[200px] h-10 md:flex-1 md:mt-9">
             <button
               type="button"
               disabled={state.isLoading}
@@ -161,7 +161,7 @@ const PostalCodeAddressField = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="absolute inset-0 flex justify-center items-center text-slate-800 rounded-lg"
+                    className="flex absolute inset-0 justify-center items-center text-slate-800 rounded-lg"
                   >
                     <LoadingSpinner className="w-6 h-6" />
                   </motion.div>
@@ -174,12 +174,12 @@ const PostalCodeAddressField = ({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="absolute -bottom-3 left-0 z-10 inline-block min-w-[200px] p-2 text-xs text-red-700 bg-white rounded-md shadow-[0_0_8px_rgba(0,0,0,0.16)] translate-y-full"
+                  className="inline-block absolute -bottom-3 left-0 z-10 p-2 min-w-[200px] text-xs text-red-700 bg-white rounded-md shadow-[0_0_8px_rgba(0,0,0,0.16)] translate-y-full"
                   role="alert"
                 >
                   <p dangerouslySetInnerHTML={{ __html: state.error }} />
                   <div
-                    className="absolute -top-6 left-3 w-4 h-7 bg-white [clip-path:polygon(0_50%,0_100%,100%_100%)]"
+                    className="[clip-path:polygon(0_50%,0_100%,100%_100%)] absolute -top-6 left-3 w-4 h-7 bg-white"
                     aria-hidden="true"
                   />
                 </motion.div>

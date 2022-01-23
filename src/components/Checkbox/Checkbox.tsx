@@ -51,15 +51,15 @@ const Checkbox = (
         htmlFor={inputProps.id}
         className={clsx(
           { 'ring-1 ring-red-400': errors?.[inputProps.name] !== undefined },
-          { 'outline outline-offset-2 outline-2 outline-black': isFocused },
+          { 'outline-2 outline-black outline outline-offset-2': isFocused },
           'flex items-center cursor-pointer'
         )}
       >
-        <div aria-hidden="false" className="flex justify-center items-center w-4 h-4 mr-2 border border-black">
+        <div aria-hidden="false" className="flex justify-center items-center mr-2 w-4 h-4 border border-black">
           {isChecked && <img src={checkIconSrc} width={11} height={8} alt="チェック" />}
         </div>
         {children}
-        {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}
+        {isRequired && <div className="py-0.5 px-2 ml-3 text-white bg-red-600">必須</div>}
       </label>
       {description && (
         <p id={descriptionId} className="mt-1 text-sm" dangerouslySetInnerHTML={{ __html: newLine(description) }} />

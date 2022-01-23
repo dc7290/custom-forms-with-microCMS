@@ -13,11 +13,11 @@ const ConfirmList = ({ list, className }: Props) => {
       {list.map(([key, value, isRequired]) => (
         <li key={key}>
           <div className="flex items-center">
-            <div className="font-bold text-lg">{key}</div>
-            {isRequired && <div className="ml-3 px-2 py-0.5 text-white bg-red-600">必須</div>}
+            <div className="text-lg font-bold">{key}</div>
+            {isRequired && <div className="py-0.5 px-2 ml-3 text-white bg-red-600">必須</div>}
           </div>
           {value.includes('\n') ? (
-            <div className="min-h-[160px] mt-2 p-2 rounded border border-black">
+            <div className="p-2 mt-2 min-h-[160px] rounded border border-black">
               {value.split('\n').map((text) => (
                 <div key={text.slice(0, 10)}>
                   {text}
@@ -26,7 +26,7 @@ const ConfirmList = ({ list, className }: Props) => {
               ))}
             </div>
           ) : (
-            <div className="min-h-[42px] mt-2 p-2 rounded border border-black">{value}</div>
+            <div className="p-2 mt-2 min-h-[42px] rounded border border-black">{value}</div>
           )}
         </li>
       ))}

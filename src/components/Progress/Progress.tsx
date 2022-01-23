@@ -10,7 +10,7 @@ const Progress = ({ progress, isSending, isError, className }: Props) => {
   return (
     <div className={clsx(className, 'relative')}>
       <div className="absolute inset-x-0 top-4 w-full h-px bg-gray-200" />
-      <div className="relative flex justify-between">
+      <div className="flex relative justify-between">
         <div className="flex flex-col items-center bg-white">
           <div
             className={clsx(
@@ -60,7 +60,7 @@ const Progress = ({ progress, isSending, isError, className }: Props) => {
             <div
               className={clsx(
                 progress === 'complete' && !isError ? 'bg-red-600' : 'bg-gray-200',
-                'w-[14px] h-[14px]  rounded-full'
+                'w-[14px] h-[14px] rounded-full'
               )}
             />
           </div>

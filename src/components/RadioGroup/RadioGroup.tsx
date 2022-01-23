@@ -25,7 +25,7 @@ const RadioGroup = ({ label, description, className, name, errors, children }: P
       aria-describedby={description !== undefined ? descriptionId : undefined}
       className={clsx(className, '')}
     >
-      <div id={labelId} className="font-bold text-lg">
+      <div id={labelId} className="text-lg font-bold">
         {label}
       </div>
       {description && (
@@ -68,13 +68,13 @@ const RadioGroupChild = (
         id={labelId}
         htmlFor={props.id}
         className={clsx(
-          { 'outline outline-offset-2 outline-2 outline-black': isFocused },
+          { 'outline-2 outline-black outline outline-offset-2': isFocused },
           'flex items-center cursor-pointer'
         )}
       >
         <div
           aria-hidden="false"
-          className="flex justify-center items-center w-4 h-4 mr-2 border border-black rounded-full"
+          className="flex justify-center items-center mr-2 w-4 h-4 rounded-full border border-black"
         >
           {isChecked && <div className="w-2 h-2 bg-black rounded-full" />}
         </div>
