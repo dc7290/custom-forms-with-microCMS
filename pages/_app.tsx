@@ -5,7 +5,7 @@ import 'focus-visible'
 import { SSRProvider } from '@react-aria/ssr'
 import { AppLayoutProps } from 'next/app'
 
-import { Layout } from '~/src/components/Layout'
+import { Layout } from '~/src/components/layout/Layout'
 
 function MyApp({ Component, pageProps }: AppLayoutProps) {
   const layoutProps =

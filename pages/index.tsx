@@ -1,13 +1,14 @@
 import type { GetStaticProps, NextLayoutPage } from 'next'
 import Head from 'next/head'
 
-import { ContactForm } from '~/src/components/ContactForm'
-import { Form } from '~/src/types/form'
+import { Form } from '~/src/components/base/molecules/Form'
+import { ErrorFormMessage } from '~/src/components/case/error/ErrorFormMessage'
+import { FormType } from '~/src/types/microCMS/Form'
 import { getForm } from '~/src/utils/cms/getContents'
 
 type Props = {
-  form: Form
-  error: string[] | null
+  form: FormType
+  errors?: string[]
 }
 
 const customFieldMap = new Map([
@@ -26,7 +27,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ preview, previewDa
 
   if (!preview) {
     return {
-      props: { form, error: null },
+      props: { form },
     }
   }
 
@@ -36,16 +37,16 @@ export const getStaticProps: GetStaticProps<Props> = async ({ preview, previewDa
   const isDuplicationAddress = fieldIds.includes('postalCodeAndAddress') && fieldIds.includes('address')
   if (!isDuplication && !isDuplicationAddress) {
     return {
-      props: { form, error: null },
+      props: { form },
     }
   }
 
-  const error: string[] = []
+  const errors: string[] = []
 
   if (isDuplication) {
     const messages = fieldIds
       .map((id) => {
-        if (fieldIds.indexOf(id) !== fieldIds.lastIndexOf(id)) {
+        if (fieldIds.indexOf(id) !== fieldIds.lastIndexOf(id) && customFieldMap.get(id) !== undefined) {
           return `「${customFieldMap.get(id)}」フィールドは複数使用できません。`
         }
 
@@ -54,49 +55,33 @@ export const getStaticProps: GetStaticProps<Props> = async ({ preview, previewDa
       .filter((message): message is string => typeof message === 'string')
 
     new Set(messages).forEach((message) => {
-      error.push(message)
+      errors.push(message)
     })
   }
 
   if (isDuplicationAddress) {
-    error.push('「郵便番号+住所」フィールドと「住所」フィールドは併用できません。')
+    errors.push('「郵便番号+住所」フィールドと「住所」フィールドは併用できません。')
   }
 
   return {
-    props: { form, error },
+    props: { form, errors },
   }
 }
 
-const IndexPage: NextLayoutPage<Props> = ({ form, error }) => {
+const IndexPage: NextLayoutPage<Props> = ({ form, errors }) => {
   return (
     <>
       <Head>
-        <title>カスタムフォーム</title>
-        <meta name="description" content="Zennの記事「microCMSを使ってフォーム作成アプリを作る」のデモサイトです。" />
+        <title>カスタムフォームデモサイト</title>
+        <meta name="description" content="microcmsを用いて、フォームをカスタマイズするデモサイト" />
       </Head>
       <div className="py-10">
-        <h1 className="text-3xl font-bold text-center">カスタムフォーム</h1>
+        <h1 className="text-center text-3xl font-bold">カスタムフォーム(仮)</h1>
         <p className="mt-8 text-center">※スタイルは仮です。自由にカスタマイズできます。</p>
-        {error === null ? (
-          <ContactForm list={form} className="container mx-auto mt-16 sm:max-w-2xl" />
+        {errors === undefined || errors.length === 0 ? (
+          <Form list={form} className="container mx-auto mt-16 sm:max-w-2xl" />
         ) : (
-          <div className="fixed inset-0 z-50">
-            <div className="absolute inset-0 bg-white/80" />
-            <div className="absolute inset-x-0 top-52 p-10 m-auto w-4/5 max-w-lg bg-white shadow-[0_0_16px_rgba(0,0,0,0.16)]">
-              フォーム生成中にエラーが発生しました。
-              <br />
-              以下のエラー内容を参考に、管理画面で修正をお願いします。
-              <br />
-              その後、もういちど画面プレビューをお試しください。
-              <ul className="mt-10 list-disc text-red-600">
-                {error.map((message) => (
-                  <li key={message}>
-                    <p role="alert">{message}</p>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
+          <ErrorFormMessage errors={errors} />
         )}
       </div>
     </>

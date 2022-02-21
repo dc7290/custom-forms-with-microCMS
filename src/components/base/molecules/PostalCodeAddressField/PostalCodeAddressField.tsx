@@ -148,13 +148,13 @@ const PostalCodeAddressField = ({
           onChange={isAutoFill ? handlePostalCodeChange : postalCodeFieldProps.onChange}
         />
         {isAutoFill && (
-          <div className="relative mt-4 max-w-[200px] h-10 md:flex-1 md:mt-9">
+          <div className="relative mt-4 h-10 max-w-[200px] md:mt-9 md:flex-1">
             <button
               type="button"
               disabled={state.isLoading}
               className={clsx(
                 state.isLoading ? 'bg-gray-300' : 'bg-black',
-                'relative w-full h-full font-bold text-white rounded-lg shadow transition-colors'
+                'relative h-full w-full rounded-lg font-bold text-white shadow transition-colors'
               )}
               onClick={handleAddressSearch}
             >
@@ -165,9 +165,9 @@ const PostalCodeAddressField = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
-                    className="flex absolute inset-0 justify-center items-center text-slate-800 rounded-lg"
+                    className="absolute inset-0 flex items-center justify-center rounded-lg text-slate-800"
                   >
-                    <LoadingSpinner className="w-6 h-6" />
+                    <LoadingSpinner className="h-6 w-6" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -178,12 +178,12 @@ const PostalCodeAddressField = ({
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  className="inline-block absolute -bottom-3 left-0 z-10 p-2 min-w-[200px] text-xs text-red-700 bg-white rounded-md shadow-[0_0_8px_rgba(0,0,0,0.16)] translate-y-full"
+                  className="absolute -bottom-3 left-0 z-10 inline-block min-w-[200px] translate-y-full rounded-md bg-white p-2 text-xs text-red-700 shadow-[0_0_8px_rgba(0,0,0,0.16)]"
                   role="alert"
                 >
                   <p dangerouslySetInnerHTML={{ __html: state.error }} />
                   <div
-                    className="[clip-path:polygon(0_50%,0_100%,100%_100%)] absolute -top-6 left-3 w-4 h-7 bg-white"
+                    className="absolute -top-6 left-3 h-7 w-4 bg-white [clip-path:polygon(0_50%,0_100%,100%_100%)]"
                     aria-hidden="true"
                   />
                 </motion.div>

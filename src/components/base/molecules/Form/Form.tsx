@@ -181,7 +181,7 @@ ${JSON.stringify({ data: state.data })}`)
       <Progress {...state} />
       {!state.isError ? (
         <>
-          <div className="p-6 mt-10 bg-gray-100 rounded md:p-8">
+          <div className="mt-10 rounded bg-gray-100 p-6 md:p-8">
             <AnimatePresence>
               {state.progress === 'input' ? (
                 <motion.form
@@ -206,8 +206,8 @@ ${JSON.stringify({ data: state.data })}`)
                 </motion.div>
               )}
               {state.isSending && (
-                <motion.div key="loading" className="flex fixed inset-0 justify-center items-center bg-white/80">
-                  <LoadingSpinner className="w-8 h-8 text-gray-900" />
+                <motion.div key="loading" className="fixed inset-0 flex items-center justify-center bg-white/80">
+                  <LoadingSpinner className="h-8 w-8 text-gray-900" />
                 </motion.div>
               )}
             </AnimatePresence>
@@ -218,22 +218,22 @@ ${JSON.stringify({ data: state.data })}`)
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="flex justify-center items-center mt-10 space-x-8"
+              className="mt-10 flex items-center justify-center space-x-8"
             >
               {state.progress === 'input' && (
                 <button
                   onClick={handleSubmit(onSubmit)}
-                  className="w-56 h-14 font-bold text-white bg-black rounded-lg shadow"
+                  className="h-14 w-56 rounded-lg bg-black font-bold text-white shadow"
                 >
                   入力内容を確認する
                 </button>
               )}
               {state.progress === 'confirm' && (
                 <>
-                  <button onClick={handleBack} className="w-56 h-14 font-bold bg-gray-300 rounded-lg shadow">
+                  <button onClick={handleBack} className="h-14 w-56 rounded-lg bg-gray-300 font-bold shadow">
                     戻る
                   </button>
-                  <button onClick={handleSend} className="w-56 h-14 font-bold text-white bg-black rounded-lg shadow">
+                  <button onClick={handleSend} className="h-14 w-56 rounded-lg bg-black font-bold text-white shadow">
                     送信する
                   </button>
                 </>
@@ -241,7 +241,7 @@ ${JSON.stringify({ data: state.data })}`)
               {state.progress === 'complete' && (
                 <a
                   href=""
-                  className="flex justify-center items-center w-56 h-14 font-bold bg-gray-300 rounded-lg shadow"
+                  className="flex h-14 w-56 items-center justify-center rounded-lg bg-gray-300 font-bold shadow"
                 >
                   TOPへ戻る
                 </a>
@@ -250,7 +250,7 @@ ${JSON.stringify({ data: state.data })}`)
           </AnimatePresence>
         </>
       ) : (
-        <div key="error" className="flex justify-center items-center mt-20 text-red-400">
+        <div key="error" className="mt-20 flex items-center justify-center text-red-400">
           <p>
             エラーが発生しました。お手数ですがもういちど最初からご入力ください。
             <br />

@@ -61,7 +61,7 @@ type RadioGroup = CommonField & {
   items: Item[]
 }
 
-export type Form = (
+export type FormType = (
   | Name
   | Email
   | Tel

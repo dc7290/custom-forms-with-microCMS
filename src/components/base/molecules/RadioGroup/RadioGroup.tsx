@@ -68,15 +68,15 @@ const RadioGroupChild = (
         id={labelId}
         htmlFor={props.id}
         className={clsx(
-          { 'outline-2 outline-black outline outline-offset-2': isFocused },
-          'flex items-center cursor-pointer'
+          { 'outline outline-2 outline-offset-2 outline-black': isFocused },
+          'flex cursor-pointer items-center'
         )}
       >
         <div
           aria-hidden="false"
-          className="flex justify-center items-center mr-2 w-4 h-4 rounded-full border border-black"
+          className="mr-2 flex h-4 w-4 items-center justify-center rounded-full border border-black"
         >
-          {isChecked && <div className="w-2 h-2 bg-black rounded-full" />}
+          {isChecked && <div className="h-2 w-2 rounded-full bg-black" />}
         </div>
         {children}
       </label>

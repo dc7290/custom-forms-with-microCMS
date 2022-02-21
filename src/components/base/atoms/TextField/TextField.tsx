@@ -32,9 +32,9 @@ const TextField = (
 
   return (
     <div className={clsx(className)}>
-      <label {...labelProps} className="flex items-center cursor-pointer">
+      <label {...labelProps} className="flex cursor-pointer items-center">
         <div className="text-lg font-bold">{label}</div>
-        {props.isRequired && <div className="py-0.5 px-2 ml-3 text-white bg-red-600">必須</div>}
+        {props.isRequired && <div className="ml-3 bg-red-600 py-0.5 px-2 text-white">必須</div>}
       </label>
       {props.description && (
         <p
@@ -47,7 +47,7 @@ const TextField = (
         {...inputProps}
         ref={ref}
         onChange={onChange}
-        className={clsx({ 'ring-1 ring-red-400': inputProps['aria-invalid'] }, 'p-2 mt-2 w-full rounded')}
+        className={clsx({ 'ring-1 ring-red-400': inputProps['aria-invalid'] }, 'mt-2 w-full rounded p-2')}
       />
       <ErrorMessage name={props.name} errors={errors} />
     </div>
