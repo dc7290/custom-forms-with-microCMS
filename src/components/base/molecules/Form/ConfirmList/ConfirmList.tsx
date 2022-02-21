@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-import { FormState } from '../ContactForm'
+import { FormState } from '../Form'
 
 type Props = {
   list: FormState['data']

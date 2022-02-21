@@ -3,9 +3,8 @@ import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes, useSt
 import { useId, useFocusRing } from 'react-aria'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
+import { ErrorMessage, ErrorMessageProps } from '~/src/components/case/error/ErrorMessage'
 import { newLine } from '~/src/utils/cms/textProcessing'
-
-import { ErrorMessage, ErrorMessageProps } from '../ErrorMessage'
 
 type Props = {
   isRequired?: boolean

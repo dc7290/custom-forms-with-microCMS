@@ -4,7 +4,7 @@ import { ForwardedRef, forwardRef, useRef } from 'react'
 import { useTextField } from 'react-aria'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
-import { ErrorMessage, ErrorMessageProps } from '~/src/components/ErrorMessage'
+import { ErrorMessage, ErrorMessageProps } from '~/src/components/case/error/ErrorMessage'
 import { newLine } from '~/src/utils/cms/textProcessing'
 import mergedRef from '~/src/utils/mergedRef'
 

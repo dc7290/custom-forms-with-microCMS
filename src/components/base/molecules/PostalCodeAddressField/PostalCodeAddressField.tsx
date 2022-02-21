@@ -1,18 +1,19 @@
 import clsx from 'clsx'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MouseEvent, useRef, useReducer } from 'react'
-import { ChangeHandler, UseFormRegister, UseFormSetValue } from 'react-hook-form'
+import { ChangeHandler, UseFormGetValues, UseFormRegister, UseFormSetValue } from 'react-hook-form'
 
+import { TextField } from '~/src/components/base/atoms/TextField'
+import { ErrorMessageProps } from '~/src/components/case/error/ErrorMessage'
+import { LoadingSpinner } from '~/src/components/case/loading/LoadingSpinner'
 import mergedRef from '~/src/utils/mergedRef'
 
-import { FormValues } from '../ContactForm/ContactForm'
-import { ErrorMessageProps } from '../ErrorMessage'
-import { LoadingSpinner } from '../LoadingSpinner'
-import { TextField } from '../TextField'
+import { FormValues } from '../Form/Form'
 
 type Props = {
   register: UseFormRegister<FormValues>
   setValue: UseFormSetValue<FormValues>
+  getValues: UseFormGetValues<FormValues>
   postalCode: {
     title: string
     placeholder?: string
@@ -50,6 +51,7 @@ const reducer = (_: State, action: Action): State => {
 const PostalCodeAddressField = ({
   register,
   setValue,
+  getValues,
   postalCode,
   address,
   isRequired,
@@ -117,6 +119,8 @@ const PostalCodeAddressField = ({
   const handlePostalCodeChange: ChangeHandler = async (e) => {
     postalCodeFieldProps.onChange(e)
 
+    if (getValues('address') !== '') return
+
     const { value } = e.target
     if (/^[0-9０-９]{3}[-ー]?[0-9０-９]{4}$/.test(value)) {
       if (!state.isLoading) search()
@@ -150,7 +154,7 @@ const PostalCodeAddressField = ({
               disabled={state.isLoading}
               className={clsx(
                 state.isLoading ? 'bg-gray-300' : 'bg-black',
-                'relative w-full h-full font-bold text-white bg-black rounded-lg shadow transition-colors'
+                'relative w-full h-full font-bold text-white rounded-lg shadow transition-colors'
               )}
               onClick={handleAddressSearch}
             >

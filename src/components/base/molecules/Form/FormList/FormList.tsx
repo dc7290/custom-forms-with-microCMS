@@ -1,15 +1,15 @@
 import clsx from 'clsx'
-import { UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
+import { UseFormGetValues, UseFormRegister, UseFormSetValue, UseFormWatch } from 'react-hook-form'
 
-import { Checkbox } from '~/src/components/Checkbox'
-import { CheckboxGroup } from '~/src/components/CheckboxGroup'
-import { ErrorMessageProps } from '~/src/components/ErrorMessage'
-import { PostalCodeAddressField } from '~/src/components/PostalCodeAddressField'
-import { RadioGroup } from '~/src/components/RadioGroup'
-import { TextArea } from '~/src/components/TextArea'
-import { TextField } from '~/src/components/TextField'
+import { Checkbox } from '~/src/components/base/atoms/Checkbox'
+import { TextArea } from '~/src/components/base/atoms/TextArea'
+import { TextField } from '~/src/components/base/atoms/TextField'
+import { CheckboxGroup } from '~/src/components/base/molecules/CheckboxGroup'
+import { PostalCodeAddressField } from '~/src/components/base/molecules/PostalCodeAddressField'
+import { RadioGroup } from '~/src/components/base/molecules/RadioGroup'
+import { ErrorMessageProps } from '~/src/components/case/error/ErrorMessage'
 
-import { FormValues } from '../ContactForm'
+import { FormValues } from '../Form'
 import { FormList } from '../presenter'
 
 type Props = {
@@ -17,11 +17,12 @@ type Props = {
   register: UseFormRegister<FormValues>
   errors: ErrorMessageProps['errors']
   setValue: UseFormSetValue<FormValues>
+  getValues: UseFormGetValues<FormValues>
   watch: UseFormWatch<FormValues>
   className?: string
 }
 
-const FormList = ({ list, register, errors, setValue, watch, className }: Props) => {
+const FormList = ({ list, register, errors, setValue, getValues, watch, className }: Props) => {
   return (
     <div className={clsx(className, 'space-y-6')}>
       {list.map((item) => {
@@ -121,7 +122,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                   placeholder: item.addressPlaceholder,
                   description: item.addressDescription,
                 }}
-                {...{ register, setValue, errors }}
+                {...{ register, setValue, getValues, errors }}
               />
             )
           }
@@ -187,7 +188,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                 isRequired={item.isRequired}
                 description={item.description}
                 {...register(item.id, {
-                  required: item.isRequired ? `「${item.title}]をチェックしてください。` : false,
+                  required: item.isRequired ? `[${item.title}]をチェックしてください。` : false,
                 })}
               >
                 {item.title}
@@ -211,7 +212,7 @@ const FormList = ({ list, register, errors, setValue, watch, className }: Props)
                       id={id}
                       value={id}
                       {...register(item.id, {
-                        required: item.isRequired ? `「${item.title}]の項目を最低1つチェックしてください。` : false,
+                        required: item.isRequired ? `[${item.title}]の項目を最低1つチェックしてください。` : false,
                       })}
                     >
                       {text}

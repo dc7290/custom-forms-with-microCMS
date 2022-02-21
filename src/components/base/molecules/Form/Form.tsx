@@ -3,22 +3,21 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { useReducer } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 
+import { Progress } from '~/src/components/base/molecules/Form/Progress'
+import { LoadingSpinner } from '~/src/components/case/loading/LoadingSpinner'
 import useWarningOnExit from '~/src/hooks/warn/useWarningOnExit'
-import { Form } from '~/src/types/form'
-
-import { LoadingSpinner } from '../LoadingSpinner'
-import { Progress } from '../Progress'
+import { FormType } from '~/src/types/microCMS/Form'
 
 import { ConfirmList } from './ConfirmList'
 import { FormList } from './FormList'
 import { createFormList, createFormListItemTitleMap } from './presenter'
 
 type Props = {
-  list: Form
+  list: FormType
   className?: string
 }
 
-export type FormValues = Record<string, string | boolean | string[]>
+export type FormValues = Record<string, string | boolean | string[]> & { hasConsented: boolean }
 
 type State = {
   progress: 'input' | 'confirm' | 'complete'
@@ -90,6 +89,7 @@ const ContactForm = ({ list, className }: Props) => {
     handleSubmit,
     formState: { errors, isDirty },
     setValue,
+    getValues,
     watch,
   } = useForm<FormValues>({
     delayError: 500,
@@ -167,7 +167,7 @@ const ContactForm = ({ list, className }: Props) => {
     //     dispatch({ type: 'ADD_ERROR' })
     //   })
     setTimeout(() => {
-      window.alert(`以下のデータで送信される想定です。
+      window.confirm(`以下のデータで送信される想定です。
 ${JSON.stringify({ data: state.data })}`)
       dispatch({ type: 'COMPLETE' })
     }, 2000)
@@ -191,9 +191,9 @@ ${JSON.stringify({ data: state.data })}`)
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                 >
-                  <FormList list={formList} {...{ register, errors, setValue, watch }} />
+                  <FormList list={formList} {...{ register, errors, setValue, getValues, watch }} />
                   {/* formの中にsubmitではないボタンがあるため、不可視のsubmit buttonを置くことでエンターキーで送信できるようにする */}
-                  <button type="submit" className="hidden" aria-hidden="true" />
+                  <button tabIndex={-1} type="submit" className="hidden" />
                 </motion.form>
               ) : state.progress === 'confirm' ? (
                 <motion.div key="confirm" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

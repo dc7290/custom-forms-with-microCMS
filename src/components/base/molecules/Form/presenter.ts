@@ -1,6 +1,6 @@
-import { Form } from '~/src/types/form'
+import { FormType } from '~/src/types/microCMS/Form'
 
-export const createFormList = (list: Form) =>
+export const createFormList = (list: FormType) =>
   list.map((item, i) => {
     const id = `field-${i + 1}`
 
