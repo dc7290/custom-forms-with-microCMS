@@ -185,6 +185,7 @@ const FormList = ({ list, register, errors, setValue, getValues, watch, classNam
                 key={item.id}
                 errors={errors}
                 id={item.id}
+                isChecked={watch(item.id) as boolean}
                 isRequired={item.isRequired}
                 description={item.description}
                 {...register(item.id, {
@@ -206,11 +207,17 @@ const FormList = ({ list, register, errors, setValue, getValues, watch, classNam
                 errors={errors}
               >
                 {item.items.map(({ text, id }) => {
+                  const currentValue = watch(item.id)
                   return (
                     <CheckboxGroup.Child
                       key={text}
                       id={id}
                       value={id}
+                      isChecked={
+                        typeof currentValue === 'string' || typeof currentValue === 'boolean'
+                          ? false
+                          : currentValue.includes(id)
+                      }
                       {...register(item.id, {
                         required: item.isRequired ? `[${item.title}]の項目を最低1つチェックしてください。` : false,
                       })}

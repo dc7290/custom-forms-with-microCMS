@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes, ReactNode, useState } from 'react'
+import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes, ReactNode } from 'react'
 import { useFocusRing, useId } from 'react-aria'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
@@ -40,6 +40,7 @@ const CheckboxGroup = ({ label, isRequired, description, className, name, errors
 }
 
 type ChildProps = {
+  isChecked: boolean
   className?: string
 } & UseFormRegisterReturn &
   Omit<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>, 'onChange'>
@@ -48,14 +49,12 @@ const arrowSrc =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMC44MjgiIGhlaWdodD0iNy45MTQiIHZpZXdCb3g9IjAgMCAxMC44MjggNy45MTQiPjxwYXRoIGQ9Ik0xNCw5LDguNSwxNC41LDYsMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00LjU4NiAtNy41ODYpIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+'
 
 const CheckboxGroupChild = (
-  { className, onChange, children, ...props }: ChildProps,
+  { isChecked, className, onChange, children, ...props }: ChildProps,
   forwardedRef: ForwardedRef<HTMLInputElement>
 ) => {
   const labelId = useId()
 
   const { isFocused, focusProps } = useFocusRing()
-
-  const [isChecked, setIsChecked] = useState(false)
 
   return (
     <div className={clsx(className)}>
@@ -68,7 +67,6 @@ const CheckboxGroupChild = (
         className="sr-only"
         onChange={(e) => {
           onChange(e)
-          setIsChecked(e.target.checked)
         }}
         aria-checked={isChecked}
         aria-labelledby={labelId}

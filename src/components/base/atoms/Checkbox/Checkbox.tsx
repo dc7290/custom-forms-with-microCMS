@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes, useState } from 'react'
+import { DetailedHTMLProps, ForwardedRef, forwardRef, InputHTMLAttributes } from 'react'
 import { useId, useFocusRing } from 'react-aria'
 import { UseFormRegisterReturn } from 'react-hook-form'
 
@@ -7,6 +7,7 @@ import { ErrorMessage, ErrorMessageProps } from '~/src/components/case/error/Err
 import { newLine } from '~/src/utils/cms/textProcessing'
 
 type Props = {
+  isChecked: boolean
   isRequired?: boolean
   description?: string
   className?: string
@@ -18,15 +19,13 @@ const checkIconSrc =
   'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMC44MjgiIGhlaWdodD0iNy45MTQiIHZpZXdCb3g9IjAgMCAxMC44MjggNy45MTQiPjxwYXRoIGQ9Ik0xNCw5LDguNSwxNC41LDYsMTIiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC00LjU4NiAtNy41ODYpIiBmaWxsPSJub25lIiBzdHJva2U9IiMzMzMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIgc3Ryb2tlLXdpZHRoPSIyIi8+PC9zdmc+'
 
 const Checkbox = (
-  { isRequired, description, errors, className, children, onChange, ...inputProps }: Props,
+  { isChecked, isRequired, description, errors, className, children, onChange, ...inputProps }: Props,
   forwardedRef: ForwardedRef<HTMLInputElement>
 ) => {
   const labelId = useId()
   const descriptionId = useId()
 
   const { isFocused, focusProps } = useFocusRing()
-
-  const [isChecked, setIsChecked] = useState(false)
 
   return (
     <div className={clsx(className)}>
@@ -38,7 +37,6 @@ const Checkbox = (
         className="sr-only"
         onChange={(e) => {
           onChange(e)
-          setIsChecked(e.target.checked)
         }}
         aria-checked={isChecked}
         aria-required={isRequired}
