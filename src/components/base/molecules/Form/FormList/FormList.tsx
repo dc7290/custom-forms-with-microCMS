@@ -214,7 +214,9 @@ const FormList = ({ list, register, errors, setValue, getValues, watch, classNam
                       id={id}
                       value={id}
                       isChecked={
-                        typeof currentValue === 'string' || typeof currentValue === 'boolean'
+                        currentValue === undefined
+                          ? false
+                          : typeof currentValue === 'string' || typeof currentValue === 'boolean'
                           ? false
                           : currentValue.includes(id)
                       }
